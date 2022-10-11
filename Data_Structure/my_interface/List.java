@@ -1,6 +1,7 @@
+package my_interface;
 /*
-     자바 List Interface
-     이 List Interface는 ArrayList, SinglyLinkedList, DoublyLinkedList에 의해 구현된다.
+     자바 my_interface.List Interface
+     이 my_interface.List Interface는 ArrayList, SinglyLinkedList, DoublyLinkedList에 의해 구현된다.
  */
 
 public interface List<E> {
