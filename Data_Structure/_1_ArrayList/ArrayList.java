@@ -1,7 +1,11 @@
 package _1_ArrayList;
 
-import java.util.Arrays;
 import my_interface.List;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 public class ArrayList<E> implements List<E>, Cloneable, Iterable<E> {
@@ -138,5 +142,184 @@ public class ArrayList<E> implements List<E>, Cloneable, Iterable<E> {
           }
           array[index] = value;
           size++;
+     }
+
+     @SuppressWarnings("unchecked")
+     @Override
+     public E get(int index) {
+          if (index >= size || index < 0) {
+               throw new IndexOutOfBoundsException();
+          }
+          return (E) array[index];
+     }
+
+     @Override
+     public void set(int index, E value) {
+          if (index >= size || index < 0) {
+               throw new IndexOutOfBoundsException();
+          } else {
+               array[index] = value;
+          }
+     }
+
+     @Override
+     public int indexOf(Object value) {
+          if (value == null) {
+               for (int i = 0; i < size; i++) {
+                    if (array[i] == null) {
+                         return i;
+                    }
+               }
+          } else {
+               for (int i = 0; i < size; i++) {
+                    if (value.equals(array[i])) {
+                         return i;
+                    }
+               }
+          }
+          return -1;
+     }
+
+     public int lastIndexOf(Object value) {
+          if (value == null) {
+               for (int i = size - 1; i >= 0; i--) {
+                    if (array[i] == null) {
+                         return i;
+                    }
+               }
+          } else {
+               for (int i = size - 1; i >= 0; i--) {
+                    if (value.equals(array[i])) {
+                         return i;
+                    }
+               }
+          }
+          return -1;
+     }
+
+     @Override
+     public boolean contains(Object value) {
+          return indexOf(value) >= 0;
+     }
+
+     @SuppressWarnings("unchecked")
+     @Override
+     public E remove(int index) {
+          if (index >= size || index < 0) {
+               throw new IndexOutOfBoundsException();
+          }
+
+          E element = (E) array[index];
+          array[index] = null;
+
+          for (int i = index; i < size - 1; i++) {
+               array[i] = array[i + 1];
+               array[i + 1] = null;
+          }
+          size--;
+          resize();
+          return element;
+     }
+
+     @Override
+     public boolean remove(Object value) {
+          int index = indexOf(value);
+          if (index == -1) {
+               return false;
+          }
+          remove(value);
+          return true;
+     }
+
+     @Override
+     public boolean isEmpty() {
+          return size == 0;
+     }
+
+     @Override
+     public int size() {
+          return size;
+     }
+
+     @Override
+     public void clear() {
+          for (int i = 0; i < size; i++) {
+               array[i] = null;
+          }
+          size = 0;
+          resize();
+     }
+
+     @Override
+     public Object clone() {
+
+          try {
+               ArrayList<?> cloneList = (ArrayList<?>) super.clone();
+               cloneList.array = new Object[size];
+
+               System.arraycopy(array, 0, cloneList.array, 0, size);
+
+               return cloneList;
+          } catch (CloneNotSupportedException e) {
+               throw new Error(e);
+          }
+     }
+
+     public void sort() {
+          sort(null);
+     }
+
+     @SuppressWarnings("unchecked")
+     public void sort(Comparator<? super E> c) {
+          Arrays.sort((E[]) array, 0, size, c);
+     }
+
+     public Object[] toArray() {
+          return Arrays.copyOf(array, size);
+     }
+
+     @SuppressWarnings("unchecked")
+     public <T> T[] toArray(T[] a) {
+          if (a.length < size) {
+               return (T[]) Arrays.copyOf(array, size, a.getClass());
+          }
+
+          System.arraycopy(array, 0, a, 0, size);
+
+          if (a.length > size) {
+               a[size] = null;
+          }
+          return a;
+     }
+
+     @Override
+     public Iterator<E> iterator() {
+          return new Iter();
+     }
+
+     private class Iter implements Iterator<E> {
+
+          private int now = 0;
+
+          @Override
+          public boolean hasNext() {
+               return now < size;
+          }
+
+          @SuppressWarnings("unchecked")
+          @Override
+          public E next() {
+               int cs = now;
+               if (cs >= size) {
+                    throw new NoSuchElementException();
+               }
+               Object[] data = ArrayList.this.array;
+               now = cs + 1;
+               return (E) data[cs];
+          }
+
+          public void remove() {
+               throw new UnsupportedOperationException();
+          }
      }
 }
