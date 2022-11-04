@@ -1,5 +1,6 @@
 package _1_ArrayList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -7,7 +8,7 @@ import java.util.NoSuchElementException;
 import my_interface.MyList;
 
 
-public class ArrayList<E> implements MyList<E>, Cloneable, Iterable<E> {
+public class MyArrayList<E> implements MyList<E>, Cloneable, Iterable<E> {
 
   private static final int DEFAULT_CAPACITY = 10;
 
@@ -28,12 +29,12 @@ public class ArrayList<E> implements MyList<E>, Cloneable, Iterable<E> {
 
   Object[] array;
 
-  public ArrayList() {
+  public MyArrayList() {
     this.array = EMPTY_ARRAY;
     this.size = 0;
   }
 
-  public ArrayList(int capacity) {
+  public MyArrayList(int capacity) {
        if (capacity < 0) {
             throw new IllegalArgumentException();
        }
@@ -254,7 +255,7 @@ public class ArrayList<E> implements MyList<E>, Cloneable, Iterable<E> {
   public Object clone() {
 
     try {
-      ArrayList<?> cloneList = (ArrayList<?>) super.clone();
+      MyArrayList<?> cloneList = (MyArrayList<?>) super.clone();
       cloneList.array = new Object[size];
 
       System.arraycopy(array, 0, cloneList.array, 0, size);
@@ -313,7 +314,7 @@ public class ArrayList<E> implements MyList<E>, Cloneable, Iterable<E> {
       if (cs >= size) {
         throw new NoSuchElementException();
       }
-      Object[] data = ArrayList.this.array;
+      Object[] data = MyArrayList.this.array;
       now = cs + 1;
       return (E) data[cs];
     }
