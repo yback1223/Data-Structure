@@ -9,7 +9,7 @@ package my_interface;
  */
 
 
-public interface MyList<E> {
+public interface MyListInterface<E> {
 
   boolean add(E value);
   /*

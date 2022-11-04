@@ -7,7 +7,7 @@ package my_interface;
   @version 1.0
  */
 
-public interface MyStack<E> {
+public interface MyStackInterface<E> {
 
   E push(E item);
   /*

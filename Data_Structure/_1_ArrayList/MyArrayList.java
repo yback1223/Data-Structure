@@ -1,14 +1,13 @@
 package _1_ArrayList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import my_interface.MyList;
+import my_interface.MyListInterface;
 
 
-public class MyArrayList<E> implements MyList<E>, Cloneable, Iterable<E> {
+public class MyArrayList<E> implements MyListInterface<E>, Cloneable, Iterable<E> {
 
   private static final int DEFAULT_CAPACITY = 10;
 
