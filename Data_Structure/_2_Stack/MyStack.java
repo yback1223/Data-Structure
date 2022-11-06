@@ -23,8 +23,8 @@ public class MyStack<E> implements MyStackInterface<E>, Cloneable, Iterable<E> {
    */
   private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
 
-  private static final int DEFAULT_CAPACITY = 10;
-  private static final Object[] EMPTY_ARRAY = {};
+  private static final int DEFAULT_CAPACITY = 10; // 최소(기본) 용적 크기
+  private static final Object[] EMPTY_ARRAY = {}; // 요소 개수
 
   private Object[] array; // 요소를 담을 배열
   private int size; // 요소 개수
@@ -47,18 +47,21 @@ public class MyStack<E> implements MyStackInterface<E>, Cloneable, Iterable<E> {
   }
 
   private void resize() {
+
     if (Arrays.equals(array, EMPTY_ARRAY)) {
       array = new Object[DEFAULT_CAPACITY];
       return;
     }
 
     int arrayCapacity = array.length;
+
     if (size == arrayCapacity) {
       //default growing 1.5x
       int newSize = hugeRangeCheck(arrayCapacity, arrayCapacity + arrayCapacity << 1);
       array = Arrays.copyOf(array, newSize);
       return;
     }
+
     if (size < (arrayCapacity / 2)) {
       int newCapacity = (arrayCapacity / 2);
       array = Arrays.copyOf(array, Math.max(DEFAULT_CAPACITY, newCapacity));
