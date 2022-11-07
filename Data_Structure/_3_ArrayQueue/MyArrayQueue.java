@@ -214,15 +214,25 @@ public class MyArrayQueue<E> implements MyQueueInterface<E>, Cloneable, Iterable
         }
     }
 
+    /**
+     * Comparator를 넘겨주지 않은 경우해당 객체의 Comparable에 구현된 정렬 방식을 사용한다.
+     * 만약 구현되어 있지 않으면 cannot be cast to clas java.lang.Comparable에러가 발생한다.
+     * 만약 구현되어 있을 경우 null로 파라미터를 넘기면 Arrays.sort()가
+     * 객체의 CompareTo 메소드에 정의된 방식대로 정렬한다.
+     */
     public void sort() {
         sort(null);
     }
 
     @SuppressWarnings("unchecked")
     public void sort(Comparator<? super E> c) {
+
+        // null 접근 방지를 위해 toArray로 요소만 있는 배열을 얻어 이를 정렬한 뒤 덮어씌운다.
         Object[] res = toArray();
         Arrays.sort((E[]) res, 0, size, c);
         clear();
+        // 정렬된 res의 원소를 array에 1부터 채운다.
+        // array의 front = 0 인덱스는 비워야 하므로 1번부터 채워야 하는 것이다.
         System.arraycopy(res, 0, array, 1, res.length);
         this.rear = this.size = res.length;
     }
