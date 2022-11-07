@@ -200,8 +200,22 @@ public class MyArrayQueue<E> implements MyQueueInterface<E>, Cloneable, Iterable
         return a;
     }
 
+    @Override
+    public Object clone() {
+
+        try {
+            @SuppressWarnings("unchecked")
+            MyArrayQueue<E> clone = (MyArrayQueue<E>) super.clone();
+
+            clone.array = Arrays.copyOf(array, array.length);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new Error(e);
+        }
+    }
+
     public void sort() {
-        sort();
+        sort(null);
     }
 
     @SuppressWarnings("unchecked")
