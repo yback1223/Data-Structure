@@ -91,7 +91,6 @@ public class MyArrayQueue<E> implements MyQueueInterface<E>, Cloneable, Iterable
         return true;
     }
 
-    @SuppressWarnings("unchecked")
     public E poll() {
 
         if (size == 0) {
@@ -99,6 +98,7 @@ public class MyArrayQueue<E> implements MyQueueInterface<E>, Cloneable, Iterable
         }
         front = (front + 1) % array.length;
 
+        @SuppressWarnings("unchecked")
         E item = (E) array[front];
         array[front] = null;
         size--;
