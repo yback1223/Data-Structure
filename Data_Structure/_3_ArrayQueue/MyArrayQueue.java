@@ -1,7 +1,8 @@
 package _3_ArrayQueue;
 
-import java.rmi.NoSuchObjectException;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import my_interface.MyQueueInterface;
 
@@ -197,5 +198,53 @@ public class MyArrayQueue<E> implements MyQueueInterface<E>, Cloneable, Iterable
             System.arraycopy(array, 0, a, rearLength, rear + 1);
         }
         return a;
+    }
+
+    public void sort() {
+        sort();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void sort(Comparator<? super E> c) {
+        Object[] res = toArray();
+        Arrays.sort((E[]) res, 0, size, c);
+        clear();
+        System.arraycopy(res, 0, array, 1, res.length);
+        this.rear = this.size = res.length;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iter();
+    }
+
+    private class Iter implements Iterator<E> {
+
+        private int count = 0;
+        private int len = array.length;
+        private int now = (front + 1) % len;
+
+        @Override
+        public boolean hasNext() {
+            return count < size;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        public E next() {
+            int cs = count;
+            int ns = now;
+            if (cs >= size) {
+                throw new NoSuchElementException();
+            }
+            Object[] data = MyArrayQueue.this.array;
+            count = cs + 1;
+            now = (ns + 1) % len;
+            return (E) data[ns];
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }
