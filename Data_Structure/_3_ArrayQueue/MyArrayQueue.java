@@ -233,8 +233,7 @@ public class MyArrayQueue<E> implements MyQueueInterface<E>, Cloneable, Iterable
         clear();
         // 정렬된 res의 원소를 array에 1부터 채운다.
         // array의 front = 0 인덱스는 비워야 하므로 1번부터 채워야 하는 것이다.
-        System.arraycopy(res, 0, array, 1, res.length);
-        this.rear = this.size = res.length;
+        System.arraycopy(res, 0, array, 1, res.length);this.rear = this.size = res.length;
     }
 
     @Override
