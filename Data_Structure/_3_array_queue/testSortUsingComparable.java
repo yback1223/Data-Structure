@@ -1,4 +1,4 @@
-package _3_ArrayQueue;
+package _3_array_queue;
 
 public class testSortUsingComparable {
 
@@ -21,7 +21,6 @@ public class testSortUsingComparable {
 class Student2 implements Comparable<Student2> {
     String name;
     int age;
-
 
     public Student2(String name, int age) {
         this.name = name;

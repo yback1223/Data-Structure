@@ -1,4 +1,4 @@
-package _3_ArrayQueue;
+package _3_array_queue;
 
 import java.util.Arrays;
 import java.util.Comparator;

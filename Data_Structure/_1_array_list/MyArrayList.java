@@ -1,4 +1,4 @@
-package _1_ArrayList;
+package _1_array_list;
 
 import java.util.Arrays;
 import java.util.Comparator;

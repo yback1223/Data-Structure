@@ -1,4 +1,4 @@
-package _2_Stack;
+package _2_stack;
 
 import java.util.Arrays;
 import java.util.Comparator;
